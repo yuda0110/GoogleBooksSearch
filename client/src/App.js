@@ -14,7 +14,7 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" component={Search} />
-          {/*<Route exact path="/saved" component={Saved} />*/}
+          <Route exact path="/saved" component={Saved} />
           <Route component={NoMatch} />
         </Switch>
       </>

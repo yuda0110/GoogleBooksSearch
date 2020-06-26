@@ -13,11 +13,15 @@ class Search extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <Col size="md-12">
             <Jumbotron>
               <h1>(React) Google Books Search</h1>
               <h2>Search for and Save Books of Internet</h2>
             </Jumbotron>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-12">
             <h3>Book Search</h3>
             <form>
               <Input
@@ -33,6 +37,11 @@ class Search extends Component {
                 Search
               </FormBtn>
             </form>
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-12">
+            <h3>Result</h3>
           </Col>
         </Row>
       </Container>
