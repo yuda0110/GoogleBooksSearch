@@ -3,6 +3,7 @@ import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
+import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 
 class Search extends Component {
@@ -23,8 +24,8 @@ class Search extends Component {
     if (this.state.keyword) {
       API.getBooks(this.state.keyword)
         .then(res => {
-            console.log(res.data);
-            this.setState({ books: res.data });
+            console.log(res.data.items);
+            this.setState({ books: res.data.items });
         })
         .catch(err => console.log(err));
     }
@@ -63,6 +64,22 @@ class Search extends Component {
         <Row>
           <Col size="md-12">
             <h3>Result</h3>
+            {this.state.books.length ? (
+              <List>
+                {this.state.books.map(book => (
+                  <ListItem key={book.id}>
+                    <p>Title: {book.volumeInfo.title}</p>
+                    <p>Authors: {book.volumeInfo.authors.join(', ')}</p>
+                    <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
+                    <p>Description: {book.volumeInfo.description}</p>
+                    <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener">View</a>
+                    <button>Save</button>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <p>No Results to Display</p>
+            )}
           </Col>
         </Row>
       </Container>
