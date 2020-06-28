@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
@@ -6,7 +7,27 @@ import { Input, FormBtn } from "../components/Form";
 
 class Search extends Component {
   state = {
-    books: []
+    books: [],
+    keyword: ""
+  }
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.keyword) {
+      API.getBooks(this.state.keyword)
+        .then(res => {
+            console.log(res.data);
+            this.setState({ books: res.data });
+        })
+        .catch(err => console.log(err));
+    }
   }
 
   render() {
@@ -25,14 +46,14 @@ class Search extends Component {
             <h3>Book Search</h3>
             <form>
               <Input
-                // value={this.state.title}
-                // onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)"
+                value={this.state.keyword}
+                onChange={this.handleInputChange}
+                name="keyword"
+                placeholder="Enter a title of books you would like to search!"
               />
               <FormBtn
-                // disabled={!(this.state.author && this.state.title)}
-                // onClick={this.handleFormSubmit}
+                disabled={!this.state.keyword}
+                onClick={this.handleFormSubmit}
               >
                 Search
               </FormBtn>
