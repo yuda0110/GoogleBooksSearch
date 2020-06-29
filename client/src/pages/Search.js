@@ -31,6 +31,21 @@ class Search extends Component {
     }
   }
 
+  handleSave = bookData => {
+    return event => {
+      event.preventDefault();
+      API.saveBook({
+        title: bookData.volumeInfo.title,
+        authors: bookData.volumeInfo.authors,
+        description: bookData.volumeInfo.description,
+        image: bookData.volumeInfo.imageLinks.thumbnail,
+        link: bookData.volumeInfo.infoLink
+      })
+        .then(res => console.log("Book Saved."))
+        .catch(err => console.log(err));
+    }
+  }
+
   render() {
     return (
       <Container fluid>
@@ -73,7 +88,7 @@ class Search extends Component {
                     <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
                     <p>Description: {book.volumeInfo.description}</p>
                     <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener">View</a>
-                    <button>Save</button>
+                    <button onClick={this.handleSave(book)}>Save</button>
                   </ListItem>
                 ))}
               </List>
