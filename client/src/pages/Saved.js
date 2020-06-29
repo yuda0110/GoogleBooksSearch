@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
+import Header from "../components/Header";
 import { Input, FormBtn } from "../components/Form";
 
 class Saved extends Component {
@@ -12,14 +13,7 @@ class Saved extends Component {
   render() {
     return (
       <Container fluid>
-        <Row>
-          <Col size="md-12">
-            <Jumbotron>
-              <h1>(React) Google Books Search</h1>
-              <h2>Search for and Save Books of Internet</h2>
-            </Jumbotron>
-          </Col>
-        </Row>
+        <Header />
 
         <Row>
           <Col size="md-12">

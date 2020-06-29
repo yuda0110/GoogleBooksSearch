@@ -3,6 +3,7 @@ import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
+import Header from "../components/Header";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 
@@ -49,14 +50,8 @@ class Search extends Component {
   render() {
     return (
       <Container fluid>
-        <Row>
-          <Col size="md-12">
-            <Jumbotron>
-              <h1>(React) Google Books Search</h1>
-              <h2>Search for and Save Books of Internet</h2>
-            </Jumbotron>
-          </Col>
-        </Row>
+        <Header />
+
         <Row>
           <Col size="md-12">
             <h3>Book Search</h3>
