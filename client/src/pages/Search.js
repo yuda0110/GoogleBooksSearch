@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import DeleteBtn from "../components/DeleteBtn";
+import { DeleteBtn, SaveBtn } from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
 import Header from "../components/Header";
@@ -10,7 +10,8 @@ import { Input, FormBtn } from "../components/Form";
 class Search extends Component {
   state = {
     books: [],
-    keyword: ""
+    keyword: "",
+    savedBookIds: []
   }
 
   handleInputChange = event => {
@@ -29,6 +30,14 @@ class Search extends Component {
             this.setState({ books: res.data.items });
         })
         .catch(err => console.log(err));
+
+      API.getSavedBooks()
+        .then(res => {
+          const savedBookIdsArr = res.data.map(book => book.bookId);
+          console.log(savedBookIdsArr);
+          this.setState({ savedBookIds: savedBookIdsArr });
+        })
+        .catch(err => console.log(err));
     }
   }
 
@@ -36,6 +45,7 @@ class Search extends Component {
     return event => {
       event.preventDefault();
       API.saveBook({
+        bookId: bookData.id,
         title: bookData.volumeInfo.title,
         authors: bookData.volumeInfo.authors,
         description: bookData.volumeInfo.description,
@@ -83,7 +93,11 @@ class Search extends Component {
                     <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
                     <p>Description: {book.volumeInfo.description}</p>
                     <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener">View</a>
-                    <button onClick={this.handleSave(book)}>Save</button>
+                    <SaveBtn
+                      savedBookIds={this.state.savedBookIds}
+                      bookId={book.id}
+                      saveHandler={this.handleSave(book)}
+                    />
                   </ListItem>
                 ))}
               </List>

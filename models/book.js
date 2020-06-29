@@ -16,6 +16,11 @@ const Schema = mongoose.Schema;
 // }
 
 const bookSchema = new Schema({
+  bookId: {
+    type: String,
+    required: true,
+    unique: true
+  },
   authors: [
     {
       type: String,
