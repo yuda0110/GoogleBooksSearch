@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import { DeleteBtn, SaveBtn } from "../components/DeleteBtn";
+import { DeleteBtn, SaveBtn, ViewBtn } from "../components/Btn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
 import Header from "../components/Header";
@@ -92,7 +92,7 @@ class Search extends Component {
                     <p>Authors: {book.volumeInfo.authors.join(', ')}</p>
                     <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
                     <p>Description: {book.volumeInfo.description}</p>
-                    <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener">View</a>
+                    <ViewBtn link={book.volumeInfo.infoLink} />
                     <SaveBtn
                       savedBookIds={this.state.savedBookIds}
                       bookId={book.id}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import DeleteBtn from "../components/DeleteBtn";
+import DeleteBtn from "../components/Btn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
 import Header from "../components/Header";

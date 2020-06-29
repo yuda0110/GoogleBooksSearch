@@ -23,4 +23,10 @@ export const SaveBtn = (props) => {
   );
 }
 
+export const ViewBtn = ({ link }) => {
+  return (
+    <a href={link} target="_blank" rel="noopener">View</a>
+  )
+}
+
 
