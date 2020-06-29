@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
@@ -7,7 +8,20 @@ import { Input, FormBtn } from "../components/Form";
 
 class Saved extends Component {
   state = {
-    books: []
+    savedBooks: []
+  }
+
+  componentDidMount() {
+    this.loadBooks();
+  }
+
+  loadBooks = () => {
+    API.getSavedBooks()
+      .then(res => {
+          console.log(res.data);
+          this.setState({ savedBooks: res.data });
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
