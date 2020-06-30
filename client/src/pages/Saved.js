@@ -7,6 +7,8 @@ import Header from "../components/Header";
 import { Input, FormBtn } from "../components/Form";
 import {List, ListItem} from "../components/List";
 
+import "../components/List/style.css"
+
 class Saved extends Component {
   state = {
     savedBooks: []
@@ -44,17 +46,19 @@ class Saved extends Component {
             <List>
               {this.state.savedBooks.map(book => (
                 <ListItem key={book._id}>
-                  <p>Title: {book.title}</p>
-                  <p>Authors: {book.authors.join(', ')}</p>
-                  <img src={book.image} alt={book.title}/>
-                  <p>Description: {book.description}</p>
+                  <p className="title">{book.title}</p>
+                  <p className="authors">Written By {book.authors.join(', ')}</p>
+                  <div className="img-desc-container">
+                    <img src={book.image} alt={book.title}/>
+                    <p>{book.description}</p>
+                  </div>
                   <ViewBtn link={book.link} />
                   <DeleteBtn deleteHandler={this.handleDelete(book._id)} />
                 </ListItem>
               ))}
             </List>
           ) : (
-            <p>There is no saved books.</p>
+            <p className="message">There is no saved books.</p>
           )}
         </Section>
       </Container>

@@ -1,0 +1,36 @@
+.list-item {
+    padding: 3rem 0;
+}
+
+.list-item:not(:last-child) {
+    border-bottom: 1px dotted var(--color-grey2);
+}
+
+.list-item .title {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.list-item .authors {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.list-item .img-desc-container {
+    margin: .8rem 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.list-item .img-desc-container img {
+    width: 12.8rem;
+    margin-right: 1rem;
+}
+
+.list-item .img-desc-container p {
+    font-size: 1.2rem;
+}
+
+@media screen and (min-width: 601px) {
+
+}

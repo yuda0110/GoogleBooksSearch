@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 
+import "../components/List/style.css"
 import "./search.css";
 
 class Search extends Component {
@@ -96,10 +97,12 @@ class Search extends Component {
             <List>
               {this.state.books.map(book => (
                 <ListItem key={book.id}>
-                  <p>Title: {book.volumeInfo.title}</p>
-                  <p>Authors: {book.volumeInfo.authors.join(', ')}</p>
-                  <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
-                  <p>Description: {book.volumeInfo.description}</p>
+                  <p className="title">{book.volumeInfo.title}</p>
+                  <p className="authors">Written By {book.volumeInfo.authors.join(', ')}</p>
+                  <div className="img-desc-container">
+                    <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
+                    <p>{book.volumeInfo.description}</p>
+                  </div>
                   <ViewBtn link={book.volumeInfo.infoLink} />
                   <SaveBtn
                     savedBookIds={this.state.savedBookIds}
@@ -110,7 +113,7 @@ class Search extends Component {
               ))}
             </List>
           ) : (
-            <p>No Results to Display</p>
+            <p className="message">No Results to Display</p>
           )}
         </Section>
       </Container>

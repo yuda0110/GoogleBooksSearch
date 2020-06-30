@@ -67,6 +67,12 @@ ul {
 h3 {
   font-size: 2rem;
   font-weight: 500;
+  color: var(--color-blue);
+}
+
+.message {
+  font-size: 1.5rem;
+  margin: 2rem 0;
 }
 
 
