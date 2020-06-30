@@ -14,6 +14,16 @@ class Search extends Component {
     savedBookIds: []
   }
 
+  getSavedBooks = () => {
+    API.getSavedBooks()
+      .then(res => {
+        const savedBookIdsArr = res.data.map(book => book.bookId);
+        console.log(savedBookIdsArr);
+        this.setState({ savedBookIds: savedBookIdsArr });
+      })
+      .catch(err => console.log(err));
+  }
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -31,13 +41,7 @@ class Search extends Component {
         })
         .catch(err => console.log(err));
 
-      API.getSavedBooks()
-        .then(res => {
-          const savedBookIdsArr = res.data.map(book => book.bookId);
-          console.log(savedBookIdsArr);
-          this.setState({ savedBookIds: savedBookIdsArr });
-        })
-        .catch(err => console.log(err));
+      this.getSavedBooks();
     }
   }
 
@@ -52,7 +56,10 @@ class Search extends Component {
         image: bookData.volumeInfo.imageLinks.thumbnail,
         link: bookData.volumeInfo.infoLink
       })
-        .then(res => console.log("Book Saved."))
+        .then(res => {
+          console.log("Book Saved.");
+          this.getSavedBooks();
+        })
         .catch(err => console.log(err));
     }
   }
