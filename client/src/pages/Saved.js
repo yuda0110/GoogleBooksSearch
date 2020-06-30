@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import DeleteBtn, {SaveBtn, ViewBtn} from "../components/Btn";
+import { DeleteBtn, ViewBtn } from "../components/Btn";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
 import Header from "../components/Header";
@@ -25,6 +25,14 @@ class Saved extends Component {
       .catch(err => console.log(err));
   }
 
+  handleDelete = id => {
+    return () => {
+      API.deleteBook(id)
+        .then(res => this.loadBooks())
+        .catch(err => console.log(err));
+    }
+  }
+
   render() {
     return (
       <Container fluid>
@@ -42,16 +50,12 @@ class Saved extends Component {
                     <img src={book.image} alt={book.title}/>
                     <p>Description: {book.description}</p>
                     <ViewBtn link={book.link} />
-                    {/*<SaveBtn*/}
-                    {/*  savedBookIds={this.state.savedBookIds}*/}
-                    {/*  bookId={book.id}*/}
-                    {/*  saveHandler={this.handleSave(book)}*/}
-                    {/*/>*/}
+                    <DeleteBtn deleteHandler={this.handleDelete(book._id)} />
                   </ListItem>
                 ))}
               </List>
             ) : (
-              <p>No Results to Display</p>
+              <p>There is no saved books.</p>
             )}
           </Col>
         </Row>
