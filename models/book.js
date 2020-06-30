@@ -44,6 +44,10 @@ const bookSchema = new Schema({
     type: String,
     trim: true,
     required: true
+  },
+  created: {
+    type: Date,
+    default: Date.now
   }
 });
 

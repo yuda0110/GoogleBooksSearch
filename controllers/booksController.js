@@ -5,7 +5,7 @@ module.exports = {
   findAll: function(req, res) {
     db.Book
       .find()
-      .sort({ date: -1 })
+      .sort({ created: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.json(err));
   },
