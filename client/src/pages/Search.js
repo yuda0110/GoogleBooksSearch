@@ -7,6 +7,8 @@ import Header from "../components/Header";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 
+import "./search.css";
+
 class Search extends Component {
   state = {
     books: [],
@@ -72,18 +74,20 @@ class Search extends Component {
         <Section>
           <h3>Book Search</h3>
           <form>
-            <Input
-              value={this.state.keyword}
-              onChange={this.handleInputChange}
-              name="keyword"
-              placeholder="Enter a title of books you would like to search!"
-            />
-            <FormBtn
-              disabled={!this.state.keyword}
-              onClick={this.handleFormSubmit}
-            >
-              Search
-            </FormBtn>
+            <div className="form-group">
+              <Input
+                value={this.state.keyword}
+                onChange={this.handleInputChange}
+                name="keyword"
+                placeholder="Enter a title of books you would like to search!"
+              />
+              <FormBtn
+                disabled={!this.state.keyword}
+                onClick={this.handleFormSubmit}
+              >
+                Search
+              </FormBtn>
+            </div>
           </form>
         </Section>
         <Section>
