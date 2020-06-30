@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { DeleteBtn, SaveBtn, ViewBtn } from "../components/Btn";
 import Jumbotron from "../components/Jumbotron";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Section, Container } from "../components/Grid";
 import Header from "../components/Header";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
@@ -69,50 +69,46 @@ class Search extends Component {
       <Container fluid>
         <Header />
 
-        <Row>
-          <Col size="md-12">
-            <h3>Book Search</h3>
-            <form>
-              <Input
-                value={this.state.keyword}
-                onChange={this.handleInputChange}
-                name="keyword"
-                placeholder="Enter a title of books you would like to search!"
-              />
-              <FormBtn
-                disabled={!this.state.keyword}
-                onClick={this.handleFormSubmit}
-              >
-                Search
-              </FormBtn>
-            </form>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-12">
-            <h3>Result</h3>
-            {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book.id}>
-                    <p>Title: {book.volumeInfo.title}</p>
-                    <p>Authors: {book.volumeInfo.authors.join(', ')}</p>
-                    <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
-                    <p>Description: {book.volumeInfo.description}</p>
-                    <ViewBtn link={book.volumeInfo.infoLink} />
-                    <SaveBtn
-                      savedBookIds={this.state.savedBookIds}
-                      bookId={book.id}
-                      saveHandler={this.handleSave(book)}
-                    />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <p>No Results to Display</p>
-            )}
-          </Col>
-        </Row>
+        <Section>
+          <h3>Book Search</h3>
+          <form>
+            <Input
+              value={this.state.keyword}
+              onChange={this.handleInputChange}
+              name="keyword"
+              placeholder="Enter a title of books you would like to search!"
+            />
+            <FormBtn
+              disabled={!this.state.keyword}
+              onClick={this.handleFormSubmit}
+            >
+              Search
+            </FormBtn>
+          </form>
+        </Section>
+        <Section>
+          <h3>Result</h3>
+          {this.state.books.length ? (
+            <List>
+              {this.state.books.map(book => (
+                <ListItem key={book.id}>
+                  <p>Title: {book.volumeInfo.title}</p>
+                  <p>Authors: {book.volumeInfo.authors.join(', ')}</p>
+                  <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
+                  <p>Description: {book.volumeInfo.description}</p>
+                  <ViewBtn link={book.volumeInfo.infoLink} />
+                  <SaveBtn
+                    savedBookIds={this.state.savedBookIds}
+                    bookId={book.id}
+                    saveHandler={this.handleSave(book)}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <p>No Results to Display</p>
+          )}
+        </Section>
       </Container>
     )
   }
