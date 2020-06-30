@@ -97,18 +97,24 @@ class Search extends Component {
             <List>
               {this.state.books.map(book => (
                 <ListItem key={book.id}>
-                  <p className="title">{book.volumeInfo.title}</p>
-                  <p className="authors">Written By {book.volumeInfo.authors.join(', ')}</p>
+                  <div className="top">
+                    <div className="title-author-container">
+                      <p className="title">{book.volumeInfo.title}</p>
+                      <p className="authors">Written By {book.volumeInfo.authors.join(', ')}</p>
+                    </div>
+                    <div className="btns-container">
+                      <ViewBtn link={book.volumeInfo.infoLink} />
+                      <SaveBtn
+                        savedBookIds={this.state.savedBookIds}
+                        bookId={book.id}
+                        saveHandler={this.handleSave(book)}
+                      />
+                    </div>
+                  </div>
                   <div className="img-desc-container">
                     <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
                     <p>{book.volumeInfo.description}</p>
                   </div>
-                  <ViewBtn link={book.volumeInfo.infoLink} />
-                  <SaveBtn
-                    savedBookIds={this.state.savedBookIds}
-                    bookId={book.id}
-                    saveHandler={this.handleSave(book)}
-                  />
                 </ListItem>
               ))}
             </List>

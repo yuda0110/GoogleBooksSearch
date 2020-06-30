@@ -5,8 +5,8 @@ import "./style.css";
 // That way we don't have to define them all individually
 export const DeleteBtn = (props) => {
   return (
-    <span className="delete-btn" onClick={props.deleteHandler} role="button" tabIndex="0">
-      ✗ Delete
+    <span className="btn btn-red" onClick={props.deleteHandler}>
+      Delete
     </span>
   );
 }
@@ -15,9 +15,9 @@ export const SaveBtn = (props) => {
   return (
     <>
       {props.savedBookIds.includes(props.bookId) ? (
-          <button>Saved</button>
+          <button className="btn btn-saved">Saved</button>
         ) : (
-          <button onClick={props.saveHandler}>Save</button>
+          <button className="btn btn-green" onClick={props.saveHandler}>Save</button>
         )}
     </>
   );
@@ -25,7 +25,7 @@ export const SaveBtn = (props) => {
 
 export const ViewBtn = ({ link }) => {
   return (
-    <a href={link} target="_blank" rel="noopener">View</a>
+    <a href={link} className="btn btn-blue" target="_blank" rel="noopener">View</a>
   )
 }
 

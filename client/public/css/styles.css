@@ -1,11 +1,12 @@
 /* ========== VARIABLES ========== */
 :root {
   --color-green: #34a853;
+  --color-green-light: #54d076;
   --color-yellow-light: #f7e287;
   --color-yellow: #fbbc04;
   --color-red: #ea4235;
   --color-red-dark: #b81b35;
-  --color-red-light: #ee3755;
+  --color-red-light: #ff5c4f;
   --color-blue: #4184f4;
   --color-blue-light1: #679eff;
   --color-blue-light2: #e9f6fd;

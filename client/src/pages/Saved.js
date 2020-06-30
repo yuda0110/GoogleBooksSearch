@@ -46,14 +46,21 @@ class Saved extends Component {
             <List>
               {this.state.savedBooks.map(book => (
                 <ListItem key={book._id}>
-                  <p className="title">{book.title}</p>
-                  <p className="authors">Written By {book.authors.join(', ')}</p>
+                  <div className="top">
+                    <div className="title-author-container">
+                      <p className="title">{book.title}</p>
+                      <p className="authors">Written By {book.authors.join(', ')}</p>
+                    </div>
+                    <div className="btns-container">
+                      <ViewBtn link={book.link} />
+                      <DeleteBtn deleteHandler={this.handleDelete(book._id)} />
+                    </div>
+                  </div>
                   <div className="img-desc-container">
                     <img src={book.image} alt={book.title}/>
                     <p>{book.description}</p>
                   </div>
-                  <ViewBtn link={book.link} />
-                  <DeleteBtn deleteHandler={this.handleDelete(book._id)} />
+
                 </ListItem>
               ))}
             </List>
