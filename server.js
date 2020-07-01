@@ -3,6 +3,8 @@ const mongoose =require("mongoose");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
 
 const routes = require("./routes");
 
@@ -27,7 +29,16 @@ app.use(routes);
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 
+io.on("connection", client => {
+  client.on('event', data => {});
+  client.emit('test', data => {});
+});
+
 // Start the API server
-app.listen(PORT, function() {
+server.listen(PORT, function() {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
+
+// app.listen(PORT, function() {
+//   console.log(`🌎 ==> API server now on port ${PORT}!`);
+// });
