@@ -21,7 +21,6 @@ class Search extends Component {
     API.getSavedBooks()
       .then(res => {
         const savedBookIdsArr = res.data.map(book => book.bookId);
-        console.log(savedBookIdsArr);
         this.setState({ savedBookIds: savedBookIdsArr });
       })
       .catch(err => console.log(err));
@@ -38,10 +37,9 @@ class Search extends Component {
     event.preventDefault();
     if (this.state.keyword) {
       API.getBooks(this.state.keyword)
-        .then(res => {
-            console.log(res.data.items);
-            this.setState({ books: res.data.items });
-        })
+        .then(res => (
+          this.setState({ books: res.data.items })
+        ))
         .catch(err => console.log(err));
 
       this.getSavedBooks();
