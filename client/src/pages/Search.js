@@ -17,6 +17,10 @@ class Search extends Component {
     savedBookIds: []
   }
 
+  componentWillUnmount() {
+    this.props.socket.off("book_saved");
+  }
+
   getSavedBooks = () => {
     API.getSavedBooks()
       .then(res => {
@@ -60,6 +64,9 @@ class Search extends Component {
         .then(res => {
           console.log("Book Saved.");
           this.getSavedBooks();
+          this.props.socket.on("book_saved", {
+            title: bookData.volumeInfo.title
+          })
         })
         .catch(err => console.log(err));
     }

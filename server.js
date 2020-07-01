@@ -30,8 +30,12 @@ app.use(routes);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 
 io.on("connection", client => {
-  client.on('event', data => {});
-  client.emit('test', data => {});
+  client.on("new_notification", data => {
+    console.log( `The book "${data.title}" has been saved!` );
+    io.sockets.emit('show_notification', {
+      title: data.title
+    })
+  });
 });
 
 // Start the API server
