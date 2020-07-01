@@ -10,7 +10,10 @@ export function Container(props) {
 
 // This Row component lets us use a bootstrap row without having to think about class names
 export function Section(props) {
-  return <section className="section">{props.children}</section>;
+  const sectionClasses = props.page ? "section page-height" : "section";
+  return (
+    <section className={sectionClasses}>{props.children}</section>
+  );
 }
 
 // This Col component lets us size bootstrap columns with less syntax

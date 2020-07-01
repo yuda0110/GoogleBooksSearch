@@ -1,6 +1,7 @@
 .container {
     width: calc(100% - 4rem);
     max-width: 960px;
+
     margin: 0 auto;
     padding: 2rem 0;
     position: relative;
@@ -21,4 +22,8 @@
 
 .section:not(:last-child) {
     margin-bottom: 3rem;
+}
+
+.section.page-height {
+    min-height: calc(100vh - 10rem);
 }
