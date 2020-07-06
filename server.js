@@ -1,12 +1,15 @@
 const express = require("express");
+const http = require("http");
+const socketIo = require("socket.io");
 const mongoose =require("mongoose");
-const path = require("path");
-const PORT = process.env.PORT || 3001;
-const app = express();
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
-
 const routes = require("./routes");
+
+const PORT = process.env.PORT || 3001;
+
+//Setting up express and adding socketIo middleware
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -29,13 +32,22 @@ app.use(routes);
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 
-io.on("connection", client => {
-  client.on("new_notification", data => {
+//Setting up a socket with the namespace "connection" for new sockets
+io.on("connection", socket => {
+  console.log("New client connected");
+
+  //Here we listen on a new namespace called "new_notification"
+  socket.on("new_notification", data => {
     console.log( `The book "${data.title}" has been saved!` );
-    io.sockets.emit('show_notification', {
+
+    //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
+    socket.broadcast.emit('show_notification', {
       title: data.title
-    })
+    });
   });
+
+  //A special namespace "disconnect" for when a client disconnects
+  socket.on("disconnect", () => console.log("Client disconnected"));
 });
 
 // Start the API server
