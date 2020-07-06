@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import { DeleteBtn, SaveBtn, ViewBtn } from "../components/Btn";
-import Jumbotron from "../components/Jumbotron";
-import { Col, Section, Container } from "../components/Grid";
+import { SaveBtn, ViewBtn } from "../components/Btn";
+import { Section, Container } from "../components/Grid";
 import Header from "../components/Header";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
+import socketIOClient from "socket.io-client";
 
 import "../components/List/style.css"
 import "./search.css";
@@ -17,9 +17,9 @@ class Search extends Component {
     savedBookIds: []
   }
 
-  componentWillUnmount() {
-    this.props.socket.off("book_saved");
-  }
+  // componentWillUnmount() {
+  //   this.props.socket.off("book_saved");
+  // }
 
   getSavedBooks = () => {
     API.getSavedBooks()
@@ -64,7 +64,11 @@ class Search extends Component {
         .then(res => {
           console.log("Book Saved.");
           this.getSavedBooks();
-          this.props.socket.on("book_saved", {
+
+          // const socket = socketIOClient(this.props.endpoint);
+          console.log(this.props.socket);
+
+          this.props.socket.emit("incoming data", {
             title: bookData.volumeInfo.title
           })
         })
@@ -105,7 +109,7 @@ class Search extends Component {
                   <div className="top">
                     <div className="title-author-container">
                       <p className="title">{book.volumeInfo.title}</p>
-                      <p className="authors">Written By {book.volumeInfo.authors.join(', ')}</p>
+                      <p className="authors">Written By {book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : ""}</p>
                     </div>
                     <div className="btns-container">
                       <ViewBtn link={book.volumeInfo.infoLink} />

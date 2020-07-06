@@ -36,12 +36,12 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 io.on("connection", socket => {
   console.log("New client connected");
 
-  //Here we listen on a new namespace called "new_notification"
-  socket.on("new_notification", data => {
+  //Here we listen on a new namespace called "incoming data"
+  socket.on("incoming data", data => {
     console.log( `The book "${data.title}" has been saved!` );
 
     //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
-    socket.broadcast.emit('show_notification', {
+    socket.broadcast.emit('outgoing data', {
       title: data.title
     });
   });
