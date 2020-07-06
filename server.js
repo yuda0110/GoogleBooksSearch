@@ -1,10 +1,16 @@
 const express = require("express");
+
 const mongoose =require("mongoose");
 const path = require("path");
+const faye = require("faye");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
 const routes = require("./routes");
+const server = require("http").createServer(app);
+
+const bayeux = new faye.NodeAdapter({mount: "http://localhost/"});
+bayeux.attach(server);
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -28,6 +34,10 @@ app.use(routes);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 
 // Start the API server
-app.listen(PORT, function() {
+server.listen(PORT, function() {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
+
+// app.listen(PORT, function() {
+//   console.log(`🌎 ==> API server now on port ${PORT}!`);
+// });

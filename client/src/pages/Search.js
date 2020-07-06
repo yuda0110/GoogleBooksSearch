@@ -60,6 +60,9 @@ class Search extends Component {
         .then(res => {
           console.log("Book Saved.");
           this.getSavedBooks();
+          this.props.myClient.publish('/messages', {
+            text: 'Hello world'
+          });
         })
         .catch(err => console.log(err));
     }
