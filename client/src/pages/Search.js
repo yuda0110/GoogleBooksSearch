@@ -98,7 +98,7 @@ class Search extends Component {
                   <div className="top">
                     <div className="title-author-container">
                       <p className="title">{book.volumeInfo.title}</p>
-                      <p className="authors">Written By {book.volumeInfo.authors.join(', ')}</p>
+                      <p className="authors">Written By {book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : ""}</p>
                     </div>
                     <div className="btns-container">
                       <ViewBtn link={book.volumeInfo.infoLink} />
