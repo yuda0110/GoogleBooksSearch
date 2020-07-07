@@ -31,7 +31,7 @@
 }
 
 .btn-saved {
-  background: var(--color-green-light);
+  background: var(--color-green-light1);
   font-weight: 300;
   cursor: default;
 }
@@ -48,12 +48,12 @@
 
 .btn-green:hover,
 .btn-green:focus {
-  background-color: var(--color-green-light);
+  background-color: var(--color-green-light1);
 }
 
 .btn-saved:hover,
 .btn-saved:focus {
-  background-color: var(--color-green-light);
+  background-color: var(--color-green-light1);
 }
 
 a.btn {

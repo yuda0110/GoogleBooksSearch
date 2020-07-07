@@ -47,6 +47,7 @@
 }
 
 .list-item .img-desc-container p {
+    width: calc(100% - 13.8rem);
     font-size: 1.2rem;
 }
 
