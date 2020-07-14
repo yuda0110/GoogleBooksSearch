@@ -12,7 +12,7 @@ module.exports = {
   create: function(req, res) {
     db.Book
       .create(req.body)
-      .then(dbModel => req.json(dbModel))
+      .then(dbModel => res.json(dbModel))
       .catch(err => res.json(err));
   },
   remove: function(req, res) {
