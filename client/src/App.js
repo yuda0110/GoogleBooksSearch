@@ -8,18 +8,23 @@ import Nav from "./components/Nav";
 import Notification from "./components/Notification";
 
 
-const socket = io("http://127.0.0.1:3001");
-
 class App extends Component {
   state = {
     response: ""
   }
 
+  socketURL =
+    process.env.NODE_ENV === 'production'
+      ? window.location.hostname
+      : 'http://localhost:3001';
+
+  socket = io.connect(this.socketURL, {secure: true});
+
   componentDidMount() {
     console.log('process.env.NODE_ENV: ')
     console.log(process.env.NODE_ENV)
 
-    socket.on("outgoing data", data => {
+    this.socket.on("outgoing data", data => {
       this.setState({response: data})
       console.log( `The book "${this.state.response.title}" has been saved!` );
     })
@@ -34,7 +39,7 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={props => <Search {...props} socket={socket} />}
+              render={props => <Search {...props} socket={this.socket} />}
             />
             <Route exact path="/saved" component={Saved} />
             <Route component={NoMatch} />
