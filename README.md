@@ -3,9 +3,13 @@
 ### Overview
 React-based Google Books Search app.
 This assignment requires to create React components, work with helper/util functions, and utilize React lifecycle methods to query and display books based on user searches. 
-Also used Node, Express and MongoDB so that users can save books to review or purchase later.
+Used Node, Express and MongoDB so that users can save books to review or purchase later.
 
-![Google Books Search](./google-books-search-screenshot.png)
+Also use React routing and `socket.io` to create a notification that triggers whenever a user saves an book. 
+(Say you have multiple browsers open, each one visiting your site. If you save an book in one browser, then all of your browsers notifies you that a new book was saved.)
+
+
+![Google Books Search](./google-books-search-screenshot2.png)
 
 
 ### Links
@@ -22,6 +26,8 @@ Also used Node, Express and MongoDB so that users can save books to review or pu
 - [express](https://www.npmjs.com/package/express)
 - [mongoose](https://www.npmjs.com/package/mongoose)
 - [axios](https://www.npmjs.com/package/axios)
+- [socket.io](https://www.npmjs.com/package/socket.io)
+- [socket.io-client](https://www.npmjs.com/package/socket.io-client)
 
 
 # Create React Express App
