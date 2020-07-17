@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import socketIOClient from "socket.io-client";
+import io from "socket.io-client";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Search from "./pages/Search";
 import Saved from "./pages/Saved";
@@ -8,7 +8,7 @@ import Nav from "./components/Nav";
 import Notification from "./components/Notification";
 
 
-const socket = socketIOClient("http://127.0.0.1:3001");
+const socket = io("http://127.0.0.1:3001");
 
 class App extends Component {
   state = {
@@ -16,6 +16,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log('process.env.NODE_ENV: ')
+    console.log(process.env.NODE_ENV)
+
     socket.on("outgoing data", data => {
       this.setState({response: data})
       console.log( `The book "${this.state.response.title}" has been saved!` );
