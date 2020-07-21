@@ -21,10 +21,12 @@ class App extends Component {
   socket = io.connect(this.socketURL, {secure: true});
 
   componentDidMount() {
-    console.log('process.env.NODE_ENV: ')
-    console.log(process.env.NODE_ENV)
+    // this.socket.on("outgoing data", data => {
+    //   this.setState({response: data})
+    //   console.log( `The book "${this.state.response.title}" has been saved!` );
+    // })
 
-    this.socket.on("outgoing data", data => {
+    this.socket.on("incoming data", data => {
       this.setState({response: data})
       console.log( `The book "${this.state.response.title}" has been saved!` );
     })

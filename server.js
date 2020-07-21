@@ -41,7 +41,12 @@ io.on("connection", socket => {
     console.log( `The book "${data.title}" has been saved!` );
 
     //Here we broadcast it out to all other sockets EXCLUDING the socket which sent us the data
-    socket.broadcast.emit('outgoing data', {
+    // socket.broadcast.emit('outgoing data', {
+    //   title: data.title
+    // });
+
+    // We send the data to everyone, including the sender.
+    io.emit('incoming data', {
       title: data.title
     });
   });
