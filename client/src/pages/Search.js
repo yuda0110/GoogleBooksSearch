@@ -76,6 +76,18 @@ class Search extends Component {
     }
   }
 
+  getBookTitle = book => (
+    book.volumeInfo.title || 'No Title'
+  )
+
+  getBookImage = book => {
+    if (book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail) {
+      return book.volumeInfo.imageLinks.thumbnail
+    } else {
+      return '../assets/images/no-image.jpg'
+    }
+  }
+
   render() {
     return (
       <Container fluid>
@@ -105,26 +117,32 @@ class Search extends Component {
           {this.state.books.length ? (
             <List>
               {this.state.books.map(book => (
-                <ListItem key={book.id}>
-                  <div className="top">
-                    <div className="title-author-container">
-                      <p className="title">{book.volumeInfo.title}</p>
-                      <p className="authors">Written By {book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : ""}</p>
-                    </div>
-                    <div className="btns-container">
-                      <ViewBtn link={book.volumeInfo.infoLink} />
-                      <SaveBtn
-                        savedBookIds={this.state.savedBookIds}
-                        bookId={book.id}
-                        saveHandler={this.handleSave(book)}
-                      />
-                    </div>
-                  </div>
-                  <div className="img-desc-container">
-                    <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
-                    <p>{book.volumeInfo.description}</p>
-                  </div>
-                </ListItem>
+                <>
+                  {book.volumeInfo && (
+                    <ListItem key={book.id}>
+                      <div className="top">
+                        <div className="title-author-container">
+                          <p className="title">{this.getBookTitle(book)}</p>
+                          <p className="authors">Written By {book.volumeInfo.authors ? book.volumeInfo.authors.join(", ") : "No Author"}</p>
+                        </div>
+                        <div className="btns-container">
+                          <ViewBtn link={book.volumeInfo.infoLink} />
+                          <SaveBtn
+                            savedBookIds={this.state.savedBookIds}
+                            bookId={book.id}
+                            saveHandler={this.handleSave(book)}
+                          />
+                        </div>
+                      </div>
+                      <div className="img-desc-container">
+                        <img src={this.getBookImage(book)}
+                             alt={this.getBookTitle(book)}
+                        />
+                        <p>{book.volumeInfo.description || 'No description.'}</p>
+                      </div>
+                    </ListItem>
+                  )}
+                </>
               ))}
             </List>
           ) : (
